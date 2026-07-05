@@ -1,36 +1,31 @@
 package com.roommatch.dto;
 
 import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
 public class RegistroRequest {
 
     @NotBlank(message = "Los nombres son obligatorios")
+    @Size(max = 100, message = "Los nombres no pueden superar 100 caracteres")
     private String nombres;
 
     @NotBlank(message = "Los apellidos son obligatorios")
+    @Size(max = 100, message = "Los apellidos no pueden superar 100 caracteres")
     private String apellidos;
 
-    @NotBlank(message = "El email es obligatorio")
-    @Email(message = "El email no tiene un formato válido")
+    @NotBlank(message = "El correo electrónico es obligatorio")
+    @Email(message = "El correo electrónico no tiene un formato válido")
+    @Size(max = 150, message = "El correo no puede superar 150 caracteres")
     private String email;
 
     @NotBlank(message = "La contraseña es obligatoria")
-    @Size(min = 6, message = "La contraseña debe tener mínimo 6 caracteres")
+    @Size(
+            min = 6,
+            max = 100,
+            message = "La contraseña debe tener entre 6 y 100 caracteres"
+    )
     private String password;
-
-    @NotNull(message = "La edad es obligatoria")
-    @Min(value = 18, message = "Debes tener mínimo 18 años")
-    private Integer edad;
-
-    private String ocupacion;
-
-    private String universidad;
-
-    private String foto;
 
     public String getNombres() {
         return nombres;
@@ -55,44 +50,12 @@ public class RegistroRequest {
     public void setEmail(String email) {
         this.email = email;
     }
-  
+
     public String getPassword() {
         return password;
     }
 
     public void setPassword(String password) {
         this.password = password;
-    }
-  
-    public Integer getEdad() {
-        return edad;
-    }
-
-    public void setEdad(Integer edad) {
-        this.edad = edad;
-    }
-
-    public String getOcupacion() {
-        return ocupacion;
-    }
-
-    public void setOcupacion(String ocupacion) {
-        this.ocupacion = ocupacion;
-    }
-
-    public String getUniversidad() {
-        return universidad;
-    }
-
-    public void setUniversidad(String universidad) {
-        this.universidad = universidad;
-    }
-
-    public String getFoto() {
-        return foto;
-    }
-
-    public void setFoto(String foto) {
-        this.foto = foto;
     }
 }

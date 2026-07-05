@@ -1,5 +1,5 @@
 package com.roommatch.config;
-
+import org.springframework.http.HttpMethod;
 import com.roommatch.security.JwtAuthenticationFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -41,19 +41,18 @@ public class SecurityConfig {
                 )
                 .authorizeHttpRequests(auth -> auth
 
-                        // Endpoints públicos
                         .requestMatchers("/api/test/**").permitAll()
                         .requestMatchers("/api/auth/**").permitAll()
 
-                        // Swagger / OpenAPI
                         .requestMatchers("/v3/api-docs").permitAll()
                         .requestMatchers("/v3/api-docs/**").permitAll()
                         .requestMatchers("/swagger-ui.html").permitAll()
                         .requestMatchers("/swagger-ui/**").permitAll()
                         .requestMatchers("/swagger-resources/**").permitAll()
                         .requestMatchers("/webjars/**").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/api/habitaciones/**").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/api/publicaciones-roomie/**").permitAll()
 
-                        // Cualquier otro endpoint requiere token
                         .anyRequest().authenticated()
                 )
                 .addFilterBefore(
